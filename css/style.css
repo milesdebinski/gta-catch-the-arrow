@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+:root {
+  --circle-primary-color: rgba(39, 77, 107, 0.356);
+  --circle-secondary-color: rgba(5, 38, 75, 0.575);
+  --arrow-primary-color: rgba(51, 51, 51, 0.95);
+  --arrow-secondary-color: rgba(12, 12, 12, 0.137);
+  --text-color: rgb(9, 69, 148);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+/* background */
+.bg {
+  position: relative;
+  height: 100vh;
+  background: url("/img/bg.jpg") no-repeat center center/cover;
+}
+/* Data */
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  gap: 20px;
+}
+
+/* Circle */
+.circle {
+  /* outside */
+  position: absolute;
+  display: block;
+  height: 100px;
+  width: 100px;
+  border: 16px var(--circle-secondary-color) solid;
+  border-radius: 50%;
+  background: none;
+  top: 91%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* inside */
+.circle:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -14px;
+  left: -14px;
+  right: -14px;
+  bottom: -14px;
+  border: 12px solid var(--circle-primary-color);
+  border-radius: 50%;
+}
+/* Arrow */
+.arrow {
+  position: absolute;
+  border: solid var(--arrow-primary-color);
+  border-width: 0 11px 11px 0;
+  display: inline-block;
+  padding: 18px;
+  top: 11px;
+  margin: 0px 0px 0px 300px;
+  transition: all 3s linear;
+}
+/* .arrow:before {
+  content: "";
+  position: absolute;
+  border: solid var(--arrow-secondary-color);
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 16px;
+  top: 6px;
+  left: 6px;
+} */
+/* .arrow .arrow_stick {
+  position: absolute;
+  width: 60px;
+  height: 12px;
+  top: 15px;
+  right: -15px;
+  background: var(--arrow-color);
+  transform: rotate(45deg);
+} */
+.arrow.right {
+  transform: rotate(-45deg);
+}
+.arrow.left {
+  transform: rotate(135deg);
+}
+.arrow.up {
+  transform: rotate(-135deg);
+}
+.arrow.down {
+  transform: rotate(45deg);
+}
