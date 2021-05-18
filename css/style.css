@@ -46,7 +46,9 @@ body {
   top: 91%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: all 200ms linear;
 }
+
 /* inside */
 .circle:before {
   content: "";
@@ -68,7 +70,7 @@ body {
   padding: 18px;
   top: 11px;
   margin: 0px 0px 0px 300px;
-  transition: all 0s linear 0s;
+  transition: all 3s linear 0s;
 }
 /* .arrow:before {
   content: "";
