@@ -2,8 +2,9 @@
 :root {
   --circle-primary-color: rgba(39, 77, 107, 0.356);
   --circle-secondary-color: rgba(5, 38, 75, 0.575);
-  --arrow-primary-color: rgba(51, 51, 51, 0.95);
+  --arrow-primary-color: rgba(49, 49, 49, 0.85);
   --arrow-secondary-color: rgba(12, 12, 12, 0.137);
+  --tap-circle-success: rgba(138, 139, 138, 0.541);
   --text-color: rgb(9, 69, 148);
 }
 
@@ -42,7 +43,6 @@ body {
   width: 100px;
   border: 16px var(--circle-secondary-color) solid;
   border-radius: 50%;
-  background: none;
   top: 91%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -62,15 +62,35 @@ body {
   border-radius: 50%;
 }
 /* Arrow */
+.tapDiv {
+  position: absolute;
+  opacity: 0;
+  transition: all 200ms linear, margin 6s linear;
+  margin: 0px 0px 0px 400px;
+}
 .arrow {
   position: absolute;
   border: solid var(--arrow-primary-color);
   border-width: 0 11px 11px 0;
-  display: inline-block;
   padding: 18px;
-  top: 11px;
-  margin: 0px 0px 0px 300px;
-  transition: all 3s linear 0s;
+  left: 25px;
+  top: 16px;
+  /* transition: all 1s linear, margin 5s linear; */
+  z-index: 100;
+}
+.tapCircle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: none;
+  /* background: var(--tap-circle-success); */
+  border-radius: 50%;
+  top: -5px;
+  left: -5px;
+  transition: all 200ms linear, margin 6s linear;
+  z-index: -10;
+
+  opacity: 1;
 }
 /* .arrow:before {
   content: "";
