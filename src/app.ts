@@ -133,6 +133,7 @@ window.addEventListener("keydown", (action) => {
   });
   // if Fail
   if (hasFailed) {
+    scoreArray.pop();
     circle.style.background = "rgba(255, 0, 0, 0.507)";
     setTimeout(() => {
       circle.style.background = "";
