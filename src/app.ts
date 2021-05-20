@@ -123,7 +123,7 @@ window.addEventListener("keydown", (action) => {
       .className.split(" ")[1]
       .replace("d", "");
     // if Success
-    if (action.keyCode == arrowCode && el < 15 && el > -5) {
+    if (action.keyCode == arrowCode && el < 20 && el > -5) {
       if (!scoreArray.includes(i)) scoreArray.push(i);
       console.log(scoreArray);
       tapSuccess(i);
