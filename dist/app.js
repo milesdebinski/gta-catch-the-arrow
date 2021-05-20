@@ -44,14 +44,14 @@ const createArrows = (speed) => {
 };
 // Initialize difficulty level
 const easy = document.getElementById("easy").addEventListener("click", () => {
-    speed = 6000;
+    speed = 7000;
     createArrows(speed);
     console.log("easy");
 });
 const medium = document
     .getElementById("medium")
     .addEventListener("click", () => {
-    speed = 5000;
+    speed = 5500;
     createArrows(speed);
     console.log("medium");
 });
