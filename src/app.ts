@@ -48,19 +48,19 @@ const createArrows = (speed) => {
 
 // Initialize difficulty level
 const easy = document.getElementById("easy").addEventListener("click", () => {
-  speed = 5500;
+  speed = 6000;
   createArrows(speed);
   console.log("easy");
 });
 const medium = document
   .getElementById("medium")
   .addEventListener("click", () => {
-    speed = 4500;
+    speed = 5000;
     createArrows(speed);
     console.log("medium");
   });
 const hard = document.getElementById("hard").addEventListener("click", () => {
-  speed = 3500;
+  speed = 4000;
   createArrows(speed);
   console.log("hard");
 });
