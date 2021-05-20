@@ -1,16 +1,29 @@
+let audioSuccess = new Audio("../mp3/success.mp3");
+
 const arrow: HTMLElement = document.getElementById("arrow")!;
 const tapDiv: HTMLElement = document.getElementById("tapDiv")!;
 const startButton: HTMLElement = document.getElementById("start")!;
 const circle: HTMLElement = document.getElementById("circle")!;
 const tapCircle: HTMLElement = document.getElementById("tapCircle")!;
+let printScore = document.getElementById("score")!;
+let printArrow = document.getElementById("printArrow");
+let selectArrows = document.getElementById("selectArrows");
+// Difficulty level
+// Initial variables to set the game
+let speed; // speed in MS
+let scoreArray = []; // score
+let arrows = 5; // how many arrows
 
-// Computed data
-const computedTapDiv: CSSStyleDeclaration = getComputedStyle(tapDiv, null);
+// Randomize arrows
 
-// How many arrows to create
-let arrows = 5;
-// Create new arrows
-const createArrows = () => {
+const randomize = () => {
+  return Math.round(Math.random() * (40 - 37) + 37);
+};
+
+// Create new arrow
+const createArrows = (speed) => {
+  console.log(selectArrows.value);
+  console.log([speed, arrows]);
   for (let i = 0; i < arrows; i++) {
     let newTapDiv = document.createElement("div");
     let newTapCircle = document.createElement("div");
@@ -23,85 +36,119 @@ const createArrows = () => {
     newTapCircle.setAttribute("class", "tapCircle");
     newTapCircle.setAttribute("data-id", i);
     // Create new Arrow
-    newArrow.setAttribute("class", "arrow left");
+    newArrow.setAttribute("class", `arrow d${randomize()}`);
     newArrow.setAttribute("id", "arrow");
     // Append divs
     circle.appendChild(newTapDiv);
     newTapDiv.appendChild(newTapCircle);
     newTapCircle.appendChild(newArrow);
+    newTapDiv.style.transition = `all 0.2s linear 0s, margin ${speed}ms linear 0s`;
   }
 };
-// create arrows & create array of arrows
-createArrows();
-let tapDivAll = document.querySelectorAll(".tapDiv")!;
-// console.log(circle);
 
-// Display/Send arrows one by one
-const displayArrows = () => {
+// Initialize difficulty level
+const easy = document.getElementById("easy").addEventListener("click", () => {
+  speed = 5500;
+  createArrows(speed);
+  console.log("easy");
+});
+const medium = document
+  .getElementById("medium")
+  .addEventListener("click", () => {
+    speed = 4500;
+    createArrows(speed);
+    console.log("medium");
+  });
+const hard = document.getElementById("hard").addEventListener("click", () => {
+  speed = 3500;
+  createArrows(speed);
+  console.log("hard");
+});
+
+// Arrays of arrow parent divs
+let tapCircleAll;
+let tapDivAll;
+// Display/Send arrows one by one on the right side of the screen
+const displayArrows = (speed) => {
+  tapCircleAll = document.querySelectorAll(".tapCircle");
+  tapDivAll = document.querySelectorAll(".tapDiv")!;
   console.log(tapDivAll);
-
-  // function doScaledTimeout(i) {
-  //   setTimeout(function() {
-  //     alert(i);
-  //   }, i * 5000);
-  // }
-
   tapDivAll.forEach((el, i) => {
     setTimeout(() => {
+      // display arrow
       el.style.opacity = "1";
       el.style.marginLeft = "-300px";
       setTimeout(() => {
-        el.style.opacity = "0"; // how to fix this
-      }, 4500);
-      console.log("boom");
-    }, i * 3000);
+        // hide arrow after they travel to the left side of the screen
+        el.style.opacity = "0";
+      }, speed * 0.8);
+    }, (i * speed) / 9);
   });
 };
 
 // ----------------------
 // Start Button
 startButton.addEventListener("click", () => {
-  // tapCircle.style.marginLeft = "-300px";
-  // tapDiv.style.opacity = "1"; // how to fix this
-  displayArrows();
-  // hide the arrows
+  displayArrows(speed);
 });
+let arrayTapDiv = [];
 
-// space 32
-// arrow left	37
-// arrow up	38
-// arrow right	39
-// arrow down	40
-
-//
-// check for every element of the array!
-//
-//
-//
-//
-// Check if Success or Fail
+// Check if arrow pressed
 window.addEventListener("keydown", (action) => {
-  let acLeft: number = +computedTapDiv
-    .getPropertyValue("margin")
-    .split(" ")[3]
-    .replace("px", "");
-  console.log(acLeft);
-  // Check if Success
-  if (action.keyCode === 37 && acLeft < 30 && acLeft > -5) {
-    tapCircle.style.background = "var(--tap-circle-success)";
+  if (action.keyCode < 37 || action.keyCode > 40) return;
+  let hasFailed = true;
+  if (arrayTapDiv) arrayTapDiv = [];
+  tapDivAll.forEach((el) => {
+    arrayTapDiv.push(
+      +getComputedStyle(el, null)
+        .getPropertyValue("margin")
+        .split(" ")[3]
+        .replace("px", "")
+    );
+  });
+
+  // tap Success
+  const tapSuccess = (index) => {
+    audioSuccess.play();
+    tapCircleAll[index].style.background = "var(--tap-circle-success)";
     setTimeout(() => {
-      tapCircle.style.background = "";
+      tapCircleAll[index].style.background = "";
     }, 670);
-    // if wrong arrow or wrong time - Fail
-  } else if (
-    action.keyCode === 37 ||
-    action.keyCode === 38 ||
-    action.keyCode === 39 ||
-    action.keyCode === 40
-  ) {
+  };
+
+  arrayTapDiv.forEach((el, i) => {
+    // Assign arrow code to variable
+    let arrowCode = tapDivAll[i]
+      .querySelector(".arrow")
+      .className.split(" ")[1]
+      .replace("d", "");
+    // if Success
+    if (action.keyCode == arrowCode && el < 15 && el > -5) {
+      if (!scoreArray.includes(i)) scoreArray.push(i);
+      console.log(scoreArray);
+      tapSuccess(i);
+      hasFailed = false;
+      return;
+    }
+  });
+  // if Fail
+  if (hasFailed) {
     circle.style.background = "rgba(255, 0, 0, 0.507)";
     setTimeout(() => {
       circle.style.background = "";
     }, 100);
   }
+
+  printScore.textContent = scoreArray.length;
 });
+selectArrows.addEventListener("change", () => {
+  arrows = +selectArrows.value;
+  printArrow.textContent = selectArrows.value;
+});
+printArrow.textContent = selectArrows.value;
+
+// Computed data
+// const computedTapDiv: CSSStyleDeclaration = getComputedStyle(tapDiv, null);
+// const computedTapDivAll = getComputedStyle(tapDiv, null);
+// const tapTransition = computedTapDiv.getPropertyValue("transition");
+// console.log(tapTransition);
