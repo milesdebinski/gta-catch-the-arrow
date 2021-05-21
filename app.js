@@ -12,6 +12,7 @@ let arrows = 5; // default number of arrows
 let scoreArray = []; // score array
 // show_score
 let show_score = document.getElementById("show_score");
+const data = document.getElementById("data");
 // Randomize arrows
 const randomize = () => {
   return Math.round(Math.random() * (40 - 37) + 37);
@@ -60,15 +61,28 @@ const hard = document.getElementById("hard").addEventListener("click", () => {
 // Arrays of arrows
 let tapCircleAll;
 let tapDivAll;
+let endGame = false;
 // Display/Send arrows one by one on the right side of the screen
 const displayArrows = (speed) => {
   tapCircleAll = document.querySelectorAll(".tapCircle");
   tapDivAll = document.querySelectorAll(".tapDiv");
+  // ENDGAME
   setTimeout(() => {
+    // make sure to show the score
+    setTimeout(() => {
+      show_score.style.opacity = "1";
+    }, 350);
+    show_score.style.opacity = "1";
+    endGame = true;
+    setTimeout(() => {
+      data.style.display = "flex";
+      show_score.style.opacity = "0";
+    }, 3000);
+
     console.log("end game!");
     return;
   }, speed * 0.8 + (speed / 9) * arrows);
-  // kiedy sie respi ostatnia strzalka - po jakim czasie zrespi sie kolejna
+  // Show arrows on the right
   tapDivAll.forEach((el, i) => {
     setTimeout(() => {
       // display arrow
@@ -84,6 +98,7 @@ const displayArrows = (speed) => {
 
 // Start Button
 startButton.addEventListener("click", () => {
+  data.style.display = "none";
   displayArrows(speed);
   console.log([speed, arrows]);
 });
@@ -126,7 +141,7 @@ window.addEventListener("keydown", (action) => {
     }
   });
   // if Fail
-  if (hasFailed) {
+  if (hasFailed && !endGame) {
     scoreArray.pop();
     circle.style.background = "rgba(255, 0, 0, 0.507)";
     setTimeout(() => {
@@ -134,10 +149,20 @@ window.addEventListener("keydown", (action) => {
     }, 100);
   }
 
-  show_score.textContent = scoreArray.length;
-  console.log(scoreArray.length);
+  // Show Score
+  if (!endGame) {
+    show_score.textContent = scoreArray.length;
+    // show score in the circle
+    setTimeout(() => {
+      show_score.style.opacity = "1";
+      setTimeout(() => {
+        show_score.style.opacity = "0";
+      }, 300);
+    }, 50);
+  }
 });
-
+// update option list with arrows
 selectArrows.addEventListener("change", () => {
   arrows = +selectArrows.value;
+  console.log(selectArrows.value);
 });

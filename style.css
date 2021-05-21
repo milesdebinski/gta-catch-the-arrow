@@ -41,6 +41,7 @@ h3 {
   font-size: 30px;
   gap: 20px;
   padding: 200px 200px 0px 200px;
+  transition: all 500ms ease-in-out;
 }
 .btn {
   padding: 5px 15px;
@@ -114,7 +115,6 @@ h3 {
   padding: 18px;
   left: 25px;
   top: 16px;
-  /* transition: all 1s linear, margin 5s linear; */
   z-index: 100;
 }
 .tapCircle {
@@ -122,7 +122,6 @@ h3 {
   width: 80px;
   height: 80px;
   background: none;
-  /* background: var(--tap-circle-success); */
   border-radius: 50%;
   top: -5px;
   left: -5px;
@@ -166,11 +165,6 @@ h3 {
   padding: 5px;
 }
 
-.dot {
-  background: green;
-  color: green;
-}
-
 /* Show Score */
 .show_score {
   /* border: 1px solid #000; */
@@ -180,9 +174,10 @@ h3 {
   font-weight: bold;
   left: 8px;
   top: 7px;
-  color: rgba(251, 255, 249, 0.692);
-  text-shadow: 3px 3px rgba(0, 0, 0, 0.6);
+  color: rgba(251, 255, 249, 0.856);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.7);
   text-align: center;
   z-index: -10;
+  opacity: 1;
   transition: all 100ms linear;
 }
