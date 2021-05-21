@@ -1,42 +1,36 @@
-let audioSuccess = new Audio("../mp3/success.mp3");
-
-const arrow: HTMLElement = document.getElementById("arrow")!;
-const tapDiv: HTMLElement = document.getElementById("tapDiv")!;
-const startButton: HTMLElement = document.getElementById("start")!;
-const circle: HTMLElement = document.getElementById("circle")!;
-const tapCircle: HTMLElement = document.getElementById("tapCircle")!;
-let printScore = document.getElementById("score")!;
-let printArrow = document.getElementById("printArrow");
+const audioSuccess = new Audio("../mp3/success.mp3");
+const arrow = document.getElementById("arrow");
+const tapDiv = document.getElementById("tapDiv");
+const startButton = document.getElementById("start");
+const circle = document.getElementById("circle");
+const tapCircle = document.getElementById("tapCircle");
 let selectArrows = document.getElementById("selectArrows");
-// Difficulty level
+
 // Initial variables to set the game
-let speed; // speed in MS
-let scoreArray = []; // score
-let arrows = 5; // how many arrows
-
+let speed; // speed of an arrow - default medium 5500 speed
+let arrows = 5; // default number of arrows
+let scoreArray = []; // score array
+// show_score
+let show_score = document.getElementById("show_score");
 // Randomize arrows
-
 const randomize = () => {
   return Math.round(Math.random() * (40 - 37) + 37);
 };
-
-// Create new arrow
+// Create array of arrows
 const createArrows = (speed) => {
-  console.log(selectArrows.value);
-  console.log([speed, arrows]);
   for (let i = 0; i < arrows; i++) {
     let newTapDiv = document.createElement("div");
     let newTapCircle = document.createElement("div");
     let newArrow = document.createElement("div");
-    // Create new tapDiv
+    // Create new tapDiv - parent element
     newTapDiv.setAttribute("id", "tapDiv");
     newTapDiv.setAttribute("class", "tapDiv");
-    // Create new TapCricle
+    // Create new tapCricle
     newTapCircle.setAttribute("id", "tapCircle");
     newTapCircle.setAttribute("class", "tapCircle");
     newTapCircle.setAttribute("data-id", i);
-    // Create new Arrow
-    newArrow.setAttribute("class", `arrow d${randomize()}`);
+    // Create new arrow
+    newArrow.setAttribute("class", `arrow d${randomize()}`); // and randomize the direction
     newArrow.setAttribute("id", "arrow");
     // Append divs
     circle.appendChild(newTapDiv);
@@ -45,7 +39,6 @@ const createArrows = (speed) => {
     newTapDiv.style.transition = `all 0.2s linear 0s, margin ${speed}ms linear 0s`;
   }
 };
-
 // Initialize difficulty level
 const easy = document.getElementById("easy").addEventListener("click", () => {
   speed = 7000;
@@ -64,15 +57,18 @@ const hard = document.getElementById("hard").addEventListener("click", () => {
   createArrows(speed);
   console.log("hard");
 });
-
-// Arrays of arrow parent divs
+// Arrays of arrows
 let tapCircleAll;
 let tapDivAll;
 // Display/Send arrows one by one on the right side of the screen
 const displayArrows = (speed) => {
   tapCircleAll = document.querySelectorAll(".tapCircle");
-  tapDivAll = document.querySelectorAll(".tapDiv")!;
-  console.log(tapDivAll);
+  tapDivAll = document.querySelectorAll(".tapDiv");
+  setTimeout(() => {
+    console.log("end game!");
+    return;
+  }, speed * 0.8 + (speed / 9) * arrows);
+  // kiedy sie respi ostatnia strzalka - po jakim czasie zrespi sie kolejna
   tapDivAll.forEach((el, i) => {
     setTimeout(() => {
       // display arrow
@@ -86,16 +82,17 @@ const displayArrows = (speed) => {
   });
 };
 
-// ----------------------
 // Start Button
 startButton.addEventListener("click", () => {
   displayArrows(speed);
+  console.log([speed, arrows]);
 });
 let arrayTapDiv = [];
-
 // Check if arrow pressed
 window.addEventListener("keydown", (action) => {
-  if (action.keyCode < 37 || action.keyCode > 40) return;
+  if (action.keyCode < 37 || action.keyCode > 40) {
+    return;
+  }
   let hasFailed = true;
   if (arrayTapDiv) arrayTapDiv = [];
   tapDivAll.forEach((el) => {
@@ -106,7 +103,6 @@ window.addEventListener("keydown", (action) => {
         .replace("px", "")
     );
   });
-
   // tap Success
   const tapSuccess = (index) => {
     audioSuccess.play();
@@ -115,7 +111,6 @@ window.addEventListener("keydown", (action) => {
       tapCircleAll[index].style.background = "";
     }, 670);
   };
-
   arrayTapDiv.forEach((el, i) => {
     // Assign arrow code to variable
     let arrowCode = tapDivAll[i]
@@ -123,9 +118,8 @@ window.addEventListener("keydown", (action) => {
       .className.split(" ")[1]
       .replace("d", "");
     // if Success
-    if (action.keyCode == arrowCode && el < 20 && el > -5) {
+    if (action.keyCode == arrowCode && el < 17 && el > -5) {
       if (!scoreArray.includes(i)) scoreArray.push(i);
-      console.log(scoreArray);
       tapSuccess(i);
       hasFailed = false;
       return;
@@ -140,16 +134,10 @@ window.addEventListener("keydown", (action) => {
     }, 100);
   }
 
-  printScore.textContent = scoreArray.length;
+  show_score.textContent = scoreArray.length;
+  console.log(scoreArray.length);
 });
+
 selectArrows.addEventListener("change", () => {
   arrows = +selectArrows.value;
-  printArrow.textContent = selectArrows.value;
 });
-printArrow.textContent = selectArrows.value;
-
-// Computed data
-// const computedTapDiv: CSSStyleDeclaration = getComputedStyle(tapDiv, null);
-// const computedTapDivAll = getComputedStyle(tapDiv, null);
-// const tapTransition = computedTapDiv.getPropertyValue("transition");
-// console.log(tapTransition);

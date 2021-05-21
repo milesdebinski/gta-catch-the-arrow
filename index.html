@@ -5,29 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="dist/app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="bg">
 
+
       <div class="data">
-        <h1>SCORE: <span id="score" class="score">0</span>/<span
-            id="printArrow"></span></h1>
-        <h3>Select difficulty level and number of arrows:</h3>
+
+
         <div class="flex-row">
-          <select class="btn" name="arrows" id="selectArrows"><option value="5">5</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="250">250</option>
-            <option value="500">500</option>
-          </select>
-          <button class="btn" id="easy">EASY</button>
-          <button class="btn" id="medium">MEDIUM</button>
-          <button class="btn" id="hard">HARD</button>
           <button class="btn" id="start">START</button>
+
+          <div class="options">
+            <div class="option">
+              <input class="dot" type="radio" id="easy" value="easy"
+                name="difficulty">
+              <label for="easy">easy</label>
+            </div>
+            <div class="option">
+              <input class="dot" type="radio" id="medium" value="medium"
+                name="difficulty">
+              <label for="medium">medium</label>
+            </div>
+            <div class="option">
+              <input class="dot" type="radio" id="hard" value="hard"
+                name="difficulty">
+              <label for="hard">hard</label>
+            </div>
+          </div>
+          <select class="btn list" name="arrows" id="selectArrows"><option
+              value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="99">99</option>
+          </select>
           <a href="" class="btn" id="restart">RESTART</a>
+
+
         </div>
 
       </div>
@@ -41,6 +59,7 @@
               </div>
             </div>
           </div> -->
+          <div id="show_score" class="show_score"></div>
         </div>
       </div>
     </div>
