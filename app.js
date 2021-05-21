@@ -78,7 +78,8 @@ const displayArrows = (speed) => {
       data.style.display = "flex";
       show_score.style.opacity = "0";
     }, 3000);
-
+    console.log(tapDivAll);
+    tapDivAll.forEach((el) => (el.style.marginLeft = "600px"));
     console.log("end game!");
     return;
   }, speed * 0.8 + (speed / 9) * arrows);
@@ -98,6 +99,8 @@ const displayArrows = (speed) => {
 
 // Start Button
 startButton.addEventListener("click", () => {
+  scoreArray = [];
+  endGame = false;
   data.style.display = "none";
   displayArrows(speed);
   console.log([speed, arrows]);
