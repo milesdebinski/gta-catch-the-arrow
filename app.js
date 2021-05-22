@@ -12,6 +12,7 @@ let arrows = 5; // default number of arrows
 let scoreArray = []; // score array
 // show_score
 let show_score = document.getElementById("show_score");
+const show_help = document.getElementById("show_help");
 const data = document.getElementById("data");
 // Randomize arrows
 const randomize = () => {
@@ -40,7 +41,7 @@ const createArrows = (speed) => {
     newTapDiv.style.transition = `all 0.2s linear 0s, margin ${speed}ms linear 0s`;
   }
 };
-// Initialize difficulty level
+// Initialize difficulty level using buttons
 const easy = document.getElementById("easy").addEventListener("click", () => {
   speed = 7000;
   createArrows(speed);
@@ -58,10 +59,13 @@ const hard = document.getElementById("hard").addEventListener("click", () => {
   createArrows(speed);
   console.log("hard");
 });
+// Initialize difficulty level manualy (at bottom of the file)
+
 // Arrays of arrows
 let tapCircleAll;
 let tapDivAll;
-let endGame = false;
+// true if endgame stage
+let endGame = true;
 // Display/Send arrows one by one on the right side of the screen
 const displayArrows = (speed) => {
   tapCircleAll = document.querySelectorAll(".tapCircle");
@@ -75,7 +79,7 @@ const displayArrows = (speed) => {
     show_score.style.opacity = "1";
     endGame = true;
     setTimeout(() => {
-      data.style.display = "flex";
+      if (uiStart) data.style.display = "flex";
       show_score.style.opacity = "0";
     }, 3000);
     console.log(tapDivAll);
@@ -96,19 +100,37 @@ const displayArrows = (speed) => {
     }, (i * speed) / 9);
   });
 };
-
-// Start Button
-startButton.addEventListener("click", () => {
+// Manual start - invoce at the bottom of this file!
+// or use start button
+const manualStart = (manualSpeed, manualArrows) => {
+  arrows = manualArrows;
+  speed = manualSpeed;
+  createArrows(speed);
   scoreArray = [];
   endGame = false;
   data.style.display = "none";
   displayArrows(speed);
-  console.log([speed, arrows]);
+};
+let uiStart;
+// Start Button
+startButton.addEventListener("click", () => {
+  uiStart = true;
+  scoreArray = [];
+  endGame = false;
+  data.style.display = "none";
+  displayArrows(speed);
 });
 let arrayTapDiv = [];
 // Check if arrow pressed
 window.addEventListener("keydown", (action) => {
   if (action.keyCode < 37 || action.keyCode > 40) {
+    console.log("boom");
+    if (!endGame) {
+      show_help.style.opacity = "1";
+      setTimeout(() => {
+        show_help.style.opacity = "0";
+      }, 400);
+    }
     return;
   }
   let hasFailed = true;
@@ -169,3 +191,18 @@ selectArrows.addEventListener("change", () => {
   arrows = +selectArrows.value;
   console.log(selectArrows.value);
 });
+
+//
+//
+//
+//
+// set speed to:
+// easy 7000,
+// medium 5500 or
+// hard 4000 to set game difficulty.
+// Start your game manualStart(speed, number of arrows)
+// manualStart(5500, 20);
+// COMMENT OUT manualStart() if you want to use UI buttons!
+//
+//
+//
