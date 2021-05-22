@@ -103,13 +103,15 @@ const displayArrows = (speed) => {
 // Manual start - invoce at the bottom of this file!
 // or use start button
 const manualStart = (manualSpeed, manualArrows) => {
-  arrows = manualArrows;
-  speed = manualSpeed;
-  createArrows(speed);
-  scoreArray = [];
-  endGame = false;
   data.style.display = "none";
-  displayArrows(speed);
+  setTimeout(() => {
+    arrows = manualArrows;
+    speed = manualSpeed;
+    createArrows(speed);
+    scoreArray = [];
+    endGame = false;
+    displayArrows(speed);
+  }, 1000);
 };
 let uiStart;
 // Start Button
