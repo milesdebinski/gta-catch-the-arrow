@@ -201,7 +201,7 @@ selectArrows.addEventListener("change", () => {
 // medium 5500 or
 // hard 4000 to set game difficulty.
 // Start your game manualStart(speed, number of arrows)
-// manualStart(5500, 20);
+manualStart(5500, 20);
 // COMMENT OUT manualStart() if you want to use UI buttons!
 //
 //
