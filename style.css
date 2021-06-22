@@ -83,6 +83,7 @@ ol {
 .list {
   color: var(--text-color);
   background: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
 }
 .btn#start:hover {
   color: #fff;
