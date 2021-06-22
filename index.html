@@ -11,35 +11,78 @@
   <body>
     <div class="bg">
       <!-- display data -->
-      <div id="data" class="data">
-        <div class="flex-row">
-          <button class="btn" id="start">START</button>
-          <select class="btn list" name="arrows" id="selectArrows"><option
-              value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="40">40</option>
-            <option value="60">60</option>
-            <option value="99">99</option>
-          </select>
-          <div class="options">
-            <div class="option">
-              <input class="dot" type="radio" id="easy" value="easy"
-                name="difficulty">
-              <label for="easy">easy</label>
-            </div>
-            <div class="option">
-              <input class="dot" type="radio" id="medium" value="medium"
-                name="difficulty">
-              <label for="medium">medium</label>
-            </div>
-            <div class="option">
-              <input class="dot" type="radio" id="hard" value="hard"
-                name="difficulty">
-              <label for="hard">hard</label>
+      <div class="wrap">
+        <div class="flex-interface">
+          <div id="data" class="data">
+            <div class="flex-row">
+              <a href="" class="btn" id="restart">RESTART</a>
+
+              <select class="btn list" name="arrows" id="selectArrows"><option
+                  value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="99">99</option>
+              </select>
+              <div class="options">
+                <div class="option">
+                  <input class="dot" type="radio" id="easy" value="easy"
+                    name="difficulty">
+                  <label for="easy">easy</label>
+                </div>
+                <div class="option">
+                  <input class="dot" type="radio" id="medium" value="medium"
+                    name="difficulty">
+                  <label for="medium">medium</label>
+                </div>
+                <div class="option">
+                  <input class="dot" type="radio" id="hard" value="hard"
+                    name="difficulty">
+                  <label for="hard">hard</label>
+                </div>
+              </div>
+              <button class="btn" id="start">START</button>
             </div>
           </div>
-          <a href="" class="btn" id="restart">RESTART</a>
+          <div class="description">
+            <h2>Instructions</h2>
+            <p>
+              Proceed in the following order!
+              <ol>
+                <li>Set number of arrows.</li>
+                <li>Set difficulty level.</li>
+                <li>Press START button.</li>
+                <li>Use arrow keys to catch the moving arrows!</li>
+                <li>Before starting over, press RESTART!</li>
+              </ol>
+            </p>
+            <h2>Demo - Catch the Arrow</h2>
+            <p>This minigame was inspired by the "Life's a beach" mission from
+              GTA
+              San Andreas, where the player has to push correct arrows in time
+              to
+              win a dancing competition. I call it "Catch the Arrow"
+              <br>
+              <br>
+              Catch the Arrow is implemented on GTA V Role Play private server
+              and applied to various activities (such as repairing a car or
+              resuscitating other players) that the player would normaly
+              randomly
+              pass or fail. Instead, you have to win the minigame to
+              succeed.
+              <br>
+              <br>
+              If you want to check my other minigame for GTA Online called
+              "Catch
+              the Pipe" <a
+                href="https://fervent-ride-02e2b4.netlify.app/">click here</a>
+              or see the code <a
+                href="https://github.com/milesdebinski/gta_catch_the_pipe">here</a>.
+            </p>
+
+
+          </div>
         </div>
       </div>
       <div class="container">

@@ -100,7 +100,7 @@ const displayArrows = (speed) => {
     }, (i * speed) / 9);
   });
 };
-// Manual start - invoce at the bottom of this file!
+// Manual start - invoke at the bottom of this file!
 // or use start button
 const manualStart = (manualSpeed, manualArrows) => {
   data.style.display = "none";
@@ -119,8 +119,13 @@ startButton.addEventListener("click", () => {
   uiStart = true;
   scoreArray = [];
   endGame = false;
-  data.style.display = "none";
+  startButton.classList.add("lock");
+  // data.style.display = "none";
   displayArrows(speed);
+});
+const restartButton = document.getElementById("restart");
+restartButton.addEventListener("click", () => {
+  startButton.classList.remove("lock");
 });
 let arrayTapDiv = [];
 // Check if arrow pressed
@@ -194,17 +199,19 @@ selectArrows.addEventListener("change", () => {
   console.log(selectArrows.value);
 });
 
-//
-//
-//
-//
+// ****
+// ****
+// ****
 // set speed to:
 // easy 7000,
 // medium 5500 or
 // hard 4000 to set game difficulty.
+// ****
+// ****
+// ****
 // Start your game manualStart(speed, number of arrows)
-manualStart(5500, 20);
+// manualStart(5500, 20);
 // COMMENT OUT manualStart() if you want to use UI buttons!
-//
-//
-//
+// ****
+// ****
+// ****

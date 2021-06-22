@@ -5,14 +5,13 @@
   --arrow-primary-color: rgba(49, 49, 49, 0.85);
   --arrow-secondary-color: rgba(12, 12, 12, 0.137);
   --tap-circle-success: rgba(138, 139, 138, 0.541);
-  --text-color: rgb(5, 144, 179);
+  --text-color: #ccc;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: var(--text-color);
 }
 
 body {
@@ -21,10 +20,24 @@ body {
 
 a {
   text-decoration: none;
+  color: aqua;
+  transition: 250ms ease-in-out;
+}
+a:hover {
+  text-decoration: underline;
 }
 h1,
 h3 {
   text-shadow: 2px 2px #000;
+}
+ol {
+  padding: 5px 20px;
+}
+.wrap {
+  max-width: 1080px;
+  position: relative;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 /* background */
 .bg {
@@ -33,45 +46,68 @@ h3 {
   background: url("/img/bg.jpg") no-repeat center center/cover;
 }
 /* Data */
+.flex-interface {
+  padding: 100px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.flex-interface .description {
+  font-size: 18px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  padding: 20px;
+}
 .data {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  font-size: 30px;
+  /* align-items: center; */
+  font-size: 22px;
   gap: 20px;
-  padding: 200px 200px 0px 200px;
+  padding: 50px 50px 0px 50px;
   transition: all 500ms ease-in-out;
+  color: var(--text-color);
 }
 .btn {
   padding: 5px 15px;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: none;
   cursor: pointer;
   transition: all 100ms ease-in-out;
-  font-size: 25px;
+  font-size: 22px;
 }
 .btn#start,
 .list {
-  color: rgb(5, 144, 179);
-  background: rgb(11, 30, 48);
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.8);
+}
+.btn#start:hover {
+  color: #fff;
+}
+.btn#start.lock {
+  cursor: not-allowed;
+}
+.btn#start.lock:hover {
+  color: #ccc;
 }
 
 .list:hover {
-  color: rgb(11, 30, 48);
+  color: rgb(255, 255, 255);
 }
-.btn#start:hover {
-  color: rgb(11, 30, 48);
-  background: var(--text-color);
+.btn#start.show:hover {
+  color: #fff;
 }
 
 .btn#restart {
-  background: brown;
-  color: #000;
+  background: rgba(83, 6, 6, 0.8);
+  color: #ccc;
 }
 .btn#restart:hover {
-  color: brown;
-  background: #000;
+  color: #fff;
+  /* background: #000; */
 }
 
 /* Circle */
@@ -151,6 +187,7 @@ h3 {
 
 /* Flex Row */
 .flex-row {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -159,7 +196,7 @@ h3 {
 }
 
 .options {
-  background: rgb(11, 30, 48);
+  background: rgba(0, 0, 0, 0.7);
   border: 1px solid #000;
   border-radius: 10px;
   padding: 5px;
