@@ -114,15 +114,16 @@ const manualStart = (manualSpeed, manualArrows) => {
   }, 1000);
 };
 let uiStart;
-// Start Button
-startButton.addEventListener("click", () => {
+// Start & Restart Buttons
+const startTheGame = () => {
   uiStart = true;
   scoreArray = [];
   endGame = false;
   startButton.classList.add("lock");
-  // data.style.display = "none";
   displayArrows(speed);
-});
+  startButton.removeEventListener("click", startTheGame);
+};
+startButton.addEventListener("click", startTheGame);
 const restartButton = document.getElementById("restart");
 restartButton.addEventListener("click", () => {
   startButton.classList.remove("lock");
